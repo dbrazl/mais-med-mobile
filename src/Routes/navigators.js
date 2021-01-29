@@ -2,11 +2,11 @@ import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 
 import transition from './transition';
 
-import SignIn from '../pages/SignIn';
+import SearchPharm from '../pages/SearchPharm';
 
 export const SignSwitchNavigator = createAnimatedSwitchNavigator(
     {
-        SignIn,
+        SearchPharm,
     },
     {
         transition: transition(),
@@ -15,7 +15,7 @@ export const SignSwitchNavigator = createAnimatedSwitchNavigator(
 
 export const UserSwitchNavigator = createAnimatedSwitchNavigator(
     {
-        SignIn,
+        SearchPharm,
     },
     {
         transition: transition(),
@@ -24,7 +24,7 @@ export const UserSwitchNavigator = createAnimatedSwitchNavigator(
 
 export const AdministratorSwitchNavigator = createAnimatedSwitchNavigator(
     {
-        SignIn,
+        SearchPharm,
     },
     {
         transition: transition(),

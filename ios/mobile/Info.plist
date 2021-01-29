@@ -70,5 +70,11 @@
 		<string>Nunito-SemiBold.ttf</string>
 		<string>Nunito-SemiBoldItalic.ttf</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is required for search health posts near you</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Your location is required for search health posts near you</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is required for search health posts near you</string>
 </dict>
 </plist>
