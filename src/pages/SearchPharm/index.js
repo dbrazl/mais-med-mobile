@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import _ from 'lodash';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { indexPharmsRequest } from '../../store/modules/pharms/actions';
+import {
+    initGeocoding,
+    searchAddressRequest,
+    setRegion,
+} from '../../store/modules/map/actions';
 
 import {
     Map,
@@ -21,35 +27,33 @@ import markerImage from '../../assets/icons/marker.png';
 import styles from '../../globals/styles';
 
 export default function SearchPharm() {
-    const [region, setRegion] = useState({
-        latitude: -27.210671,
-        longitude: -49.63627,
-        latitudeDelta: 0.010166,
-        longitudeDelta: 0.00619,
-    });
+    const region = useSelector(state => state.map.region);
     const pharms = useSelector(state => state.pharms.data);
 
     const dispatch = useDispatch();
 
     useEffect(async () => {
         const granted = await grantGeolocationPermission();
+        if (granted === PermissionsAndroid.RESULTS.GRANTED)
+            setCurrentPosition();
 
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            Geolocation.getCurrentPosition(
-                position => {
-                    const { latitude } = position.coords;
-                    const { longitude } = position.coords;
-                    setRegion({ ...region, latitude, longitude });
-                },
-                error => {
-                    console.log(error.code, error.message);
-                },
-                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-            );
-
-            dispatch(indexPharmsRequest());
-        }
+        dispatch(initGeocoding());
+        dispatch(indexPharmsRequest());
     }, []);
+
+    function setCurrentPosition() {
+        Geolocation.getCurrentPosition(
+            position => {
+                const { latitude } = position.coords;
+                const { longitude } = position.coords;
+                dispatch(setRegion(latitude, longitude));
+            },
+            error => {
+                console.log(error.code, error.message);
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+    }
 
     async function grantGeolocationPermission() {
         return await PermissionsAndroid.request(
@@ -76,6 +80,10 @@ export default function SearchPharm() {
         );
     }
 
+    function searchAddress(address) {
+        dispatch(searchAddressRequest(address));
+    }
+
     return (
         <>
             <Map
@@ -91,7 +99,10 @@ export default function SearchPharm() {
             </NamedButtonPosition>
             <AddressContainer style={styles.shadow}>
                 <SearchIcon color="black" size={24} />
-                <AddressInput placeholder="Buscar endereço" />
+                <AddressInput
+                    placeholder="Buscar endereço"
+                    onChangeText={_.debounce(searchAddress, 500)}
+                />
             </AddressContainer>
         </>
     );
