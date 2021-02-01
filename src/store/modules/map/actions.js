@@ -21,8 +21,8 @@ export function searchAddressSuccess(location) {
 export function setRegion(latitude, longitude) {
     return {
         type: '@map/SET_REGION',
-        payload: { latitude, longitude }
-    }
+        payload: { latitude, longitude },
+    };
 }
 
 export function mapOperationFailure(error, message) {

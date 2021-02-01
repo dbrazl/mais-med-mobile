@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { indexPharmsRequest } from '../../store/modules/pharms/actions';
+import {
+    indexPharmsRequest,
+    selectPharm,
+} from '../../store/modules/pharms/actions';
 import {
     initGeocoding,
     searchAddressRequest,
@@ -15,27 +18,28 @@ import {
     Map,
     MarkerMap,
     MarkerIcon,
-    SearchIcon,
-    AddressInput,
     AddressContainer,
     NamedButtonPosition,
 } from './styles';
 import NamedButton from '../../components/NamedButton';
+import SearchField from '../../components/SearchField';
 
 import pills from '../../assets/icons/pills.png';
 import markerImage from '../../assets/icons/marker.png';
-import styles from '../../globals/styles';
 
-export default function SearchPharm() {
+export default function SearchPharm({ navigation }) {
     const region = useSelector(state => state.map.region);
     const pharms = useSelector(state => state.pharms.data);
 
     const dispatch = useDispatch();
 
-    useEffect(async () => {
-        const granted = await grantGeolocationPermission();
-        if (granted === PermissionsAndroid.RESULTS.GRANTED)
-            setCurrentPosition();
+    useEffect(() => {
+        async function getUserLocation() {
+            const granted = await grantGeolocationPermission();
+            if (granted === PermissionsAndroid.RESULTS.GRANTED)
+                setCurrentPosition();
+        }
+        getUserLocation();
 
         dispatch(initGeocoding());
         dispatch(indexPharmsRequest());
@@ -70,10 +74,13 @@ export default function SearchPharm() {
     function createMarker(pharm, index) {
         return (
             <MarkerMap
+                identifier={pharm.name}
                 key={`${index}`}
                 coordinate={pharm.location}
                 title={pharm.name}
                 description={pharm.neighborhood}
+                onPress={setMarker}
+                onCalloutPress={goToPharm}
             >
                 <MarkerIcon source={markerImage} />
             </MarkerMap>
@@ -82,6 +89,14 @@ export default function SearchPharm() {
 
     function searchAddress(address) {
         dispatch(searchAddressRequest(address));
+    }
+
+    function setMarker(identifier) {
+        dispatch(selectPharm(identifier));
+    }
+
+    function goToPharm() {
+        navigation.navigate('Pharm');
     }
 
     return (
@@ -97,13 +112,24 @@ export default function SearchPharm() {
             <NamedButtonPosition>
                 <NamedButton iconSource={pills} text="Medicamentos" />
             </NamedButtonPosition>
-            <AddressContainer style={styles.shadow}>
-                <SearchIcon color="black" size={24} />
-                <AddressInput
+            <AddressContainer>
+                <SearchField
+                    onSearch={searchAddress}
                     placeholder="Buscar endereço"
-                    onChangeText={_.debounce(searchAddress, 500)}
                 />
             </AddressContainer>
         </>
     );
 }
+
+SearchPharm.propTypes = {
+    navigation: PropTypes.shape({
+        navigate: PropTypes.func,
+    }),
+};
+
+SearchPharm.defaultProps = {
+    navigation: {
+        navigate: () => {},
+    },
+};

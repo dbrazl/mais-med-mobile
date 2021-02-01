@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import MapView, { Marker } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Feather';
+import { Dimensions } from 'react-native';
 
 export const Map = styled(MapView)`
     position: absolute;
@@ -23,25 +24,8 @@ export const AddressContainer = styled.View`
     position: absolute;
     bottom: 20;
     z-index: 100;
-    margin: 0 20px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 5px;
-    background: white;
-`;
-
-export const SearchIcon = styled(Icon).attrs({
-    name: 'search',
-})``;
-
-export const AddressInput = styled.TextInput`
-    flex: 1;
-    margin-left: 5px;
-    color: black;
-    font-size: 18px;
-    font-family: 'Nunito Regular';
+    padding: 0 20px;
+    width: 100%;
 `;
 
 export const NamedButtonPosition = styled.View`

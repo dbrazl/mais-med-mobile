@@ -11,6 +11,13 @@ export function indexPharmsSuccess(data) {
     };
 }
 
+export function selectPharm(identifier) {
+    return {
+        type: '@pharms/SELECT_PHARM',
+        payload: { identifier },
+    };
+}
+
 export function pharmsOperationFailure({ error, message }) {
     return {
         type: '@pharms/PHARMS_OPERATION_FAILURE',

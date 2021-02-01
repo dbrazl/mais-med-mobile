@@ -2,6 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
     data: [],
+    pharm: {},
     status: {
         loading: false,
     },
@@ -22,6 +23,12 @@ export default function pharms(state = INITIAL_STATE, action) {
             case '@pharms/INDEX_PHARMS_SUCCESS':
                 draft.data = action.payload.data;
                 draft.status.loading = false;
+                break;
+
+            case '@pharms/SELECT_PHARM':
+                draft.pharm = state.data.find(
+                    one => one.name === action.payload.identifier
+                );
                 break;
 
             case '@pharms/PHARMS_OPERATION_FAILURE':
