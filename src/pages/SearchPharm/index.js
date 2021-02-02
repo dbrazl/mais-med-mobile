@@ -99,6 +99,10 @@ export default function SearchPharm({ navigation }) {
         navigation.navigate('Pharm');
     }
 
+    function goToSearchMedicine() {
+        navigation.navigate('SearchMedicine');
+    }
+
     return (
         <>
             <Map
@@ -110,7 +114,11 @@ export default function SearchPharm({ navigation }) {
                 {pharms.map(createMarker)}
             </Map>
             <NamedButtonPosition>
-                <NamedButton iconSource={pills} text="Medicamentos" />
+                <NamedButton
+                    iconSource={pills}
+                    text="Medicamentos"
+                    onPress={goToSearchMedicine}
+                />
             </NamedButtonPosition>
             <AddressContainer>
                 <SearchField

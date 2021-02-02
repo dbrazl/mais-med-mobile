@@ -18,17 +18,23 @@ import {
     MedicineColumn,
     MedicineIcon,
     MedicineName,
+    Alert,
     MedicineQuantity,
+    MessageContainer,
+    Message,
 } from './styles';
 import SearchField from '../../components/SearchField';
 
 import pharmBoard from '../../assets/icons/pharm-board.png';
 import vacine from '../../assets/icons/vacine-icon.png';
 import pills from '../../assets/icons/pills.png';
+import medicineTrash from '../../assets/icons/medicine-trash.png';
 
 function Pharm({ navigation }) {
     const pharm = useSelector(state => state.pharms.pharm);
     const [medicines, setMedicine] = useState(pharm.medicines);
+    const [searching, setSearching] = useState(false);
+    const backTo = navigation.getParam('backTo');
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
@@ -38,8 +44,12 @@ function Pharm({ navigation }) {
     }, []);
 
     function onPressBack(event) {
-        navigation.navigate('SearchPharm');
+        !!backTo ? goToPage(backTo) : goToPage('SearchPharm');
         return true;
+    }
+
+    function goToPage(page) {
+        navigation.navigate(page);
     }
 
     function goToSearchPharm() {
@@ -53,16 +63,20 @@ function Pharm({ navigation }) {
             );
             setMedicine(filtered);
         } else setMedicine(pharm.medicines);
+
+        setSearching(!!search);
     }
 
     function renderMedicineItem(item) {
         const isVacine = item.name.toLowerCase().includes('vacina');
+        const needToSchedule = item?.needToSchedule;
 
         return (
-            <Medicine key={`${item.index}`}>
+            <Medicine activeOpacity={needToSchedule ? 0.2 : 1}>
+                <MedicineIcon source={isVacine ? vacine : pills} />
                 <MedicineColumn>
-                    <MedicineIcon source={isVacine ? vacine : pills} />
                     <MedicineName>{item.name}</MedicineName>
+                    {needToSchedule && <Alert>Clique para agendar</Alert>}
                 </MedicineColumn>
                 <MedicineQuantity>{`${item.quantity} un`}</MedicineQuantity>
             </Medicine>
@@ -71,7 +85,9 @@ function Pharm({ navigation }) {
 
     return (
         <Container>
-            <BackButton onPress={goToSearchPharm} />
+            <BackButton
+                onPress={!!backTo ? () => goToPage(backTo) : goToSearchPharm}
+            />
             <Keyboard>
                 <Content>
                     <Figure source={pharmBoard} />
@@ -85,11 +101,24 @@ function Pharm({ navigation }) {
                     </SearchMedicineContainer>
                 </Content>
             </Keyboard>
-            <List
-                data={medicines}
-                renderItem={({ item }) => renderMedicineItem(item)}
-                keyExtractor={item => item.id}
-            />
+            {medicines.length > 0 && (
+                <List
+                    data={medicines}
+                    renderItem={({ item }) => renderMedicineItem(item)}
+                    keyExtractor={item => `${item.name}`}
+                />
+            )}
+            {!searching && medicines.length === 0 && (
+                <MessageContainer>
+                    <Message>Não há medicamentos no posto</Message>
+                </MessageContainer>
+            )}
+            {searching && medicines.length === 0 && (
+                <MessageContainer>
+                    <Figure source={medicineTrash} />
+                    <Message>O medicamento não foi encontrado</Message>
+                </MessageContainer>
+            )}
         </Container>
     );
 }
@@ -99,11 +128,13 @@ export default Pharm;
 Pharm.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func,
+        getParam: PropTypes.func,
     }),
 };
 
 Pharm.defaultProps = {
     navigation: {
         navigate: () => {},
+        getParam: () => {},
     },
 };

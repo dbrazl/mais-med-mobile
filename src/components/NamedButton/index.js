@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Container, IconContainer, Icon, TextContainer, Text } from './styles';
 import styles from '../../globals/styles';
 
-function NamedButton({ iconSource, background, color, text }) {
+function NamedButton({ iconSource, background, color, text, onPress }) {
     return (
-        <Container>
+        <Container onPress={onPress}>
             <TextContainer background={background}>
                 <Text color={color}>{text}</Text>
             </TextContainer>
@@ -22,6 +22,7 @@ NamedButton.propTypes = {
     background: PropTypes.string,
     color: PropTypes.string,
     text: PropTypes.string,
+    onPress: PropTypes.func,
 };
 
 NamedButton.defaultProps = {
@@ -29,6 +30,7 @@ NamedButton.defaultProps = {
     background: '#6DA0CF',
     color: 'white',
     text: 'Botão',
+    onPress: () => {},
 };
 
 export default NamedButton;

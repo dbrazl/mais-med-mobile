@@ -11,6 +11,20 @@ export function indexPharmsSuccess(data) {
     };
 }
 
+export function indexPharmByMedicineRequest(medicine) {
+    return {
+        type: '@pharms/INDEX_PHARM_BY_MEDICINE_REQUEST',
+        payload: { medicine },
+    };
+}
+
+export function indexPharmByMedicineSuccess(data) {
+    return {
+        type: '@pharms/INDEX_PHARM_BY_MEDICINE_SUCCESS',
+        payload: { data },
+    };
+}
+
 export function selectPharm(identifier) {
     return {
         type: '@pharms/SELECT_PHARM',

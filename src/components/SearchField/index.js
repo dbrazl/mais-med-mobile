@@ -24,7 +24,7 @@ SearchField.propTypes = {
     placeholder: PropTypes.string,
 };
 
-SearchField.defaultProp = {
+SearchField.defaultProps = {
     onSearch: () => {},
     placeholder: 'Buscar',
 };

@@ -4,11 +4,13 @@ import transition from './transition';
 
 import SearchPharm from '../pages/SearchPharm';
 import Pharm from '../pages/Pharm';
+import SearchMedicine from '../pages/SearchMedicine';
 
 export const SignSwitchNavigator = createAnimatedSwitchNavigator(
     {
         SearchPharm,
         Pharm,
+        SearchMedicine,
     },
     {
         transition: transition(),

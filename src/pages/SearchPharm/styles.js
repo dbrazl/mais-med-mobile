@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
 import MapView, { Marker } from 'react-native-maps';
-import Icon from 'react-native-vector-icons/Feather';
-import { Dimensions } from 'react-native';
 
 export const Map = styled(MapView)`
     position: absolute;

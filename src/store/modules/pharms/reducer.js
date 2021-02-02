@@ -25,6 +25,16 @@ export default function pharms(state = INITIAL_STATE, action) {
                 draft.status.loading = false;
                 break;
 
+            case '@pharms/INDEX_PHARM_BY_MEDICINE_REQUEST':
+                draft.status.loading = true;
+                draft.error = INITIAL_STATE.error;
+                break;
+
+            case '@pharms/INDEX_PHARM_BY_MEDICINE_SUCCESS':
+                draft.status.loading = false;
+                draft.data = action.payload.data;
+                break;
+
             case '@pharms/SELECT_PHARM':
                 draft.pharm = state.data.find(
                     one => one.name === action.payload.identifier
