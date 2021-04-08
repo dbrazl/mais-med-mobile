@@ -92,6 +92,8 @@ function Pharm({ navigation }) {
         navigation.navigate('Vacine', {
             name: item.name,
             quantity: item.quantity,
+            backTo: 'Pharm',
+            previousStack: backTo,
         });
     }
 
