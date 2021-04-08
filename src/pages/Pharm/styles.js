@@ -107,5 +107,3 @@ export const Message = styled.Text`
     color: black;
     text-align: center;
 `;
-
-export const Button = styled.TouchableOpacity``;

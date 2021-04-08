@@ -73,15 +73,14 @@ function Pharm({ navigation }) {
         const needToSchedule = item?.needToSchedule;
 
         return (
-            <Medicine activeOpacity={needToSchedule ? 0.2 : 1}>
+            <Medicine
+                activeOpacity={needToSchedule ? 0.2 : 1}
+                onPress={needToSchedule ? goToVacine : () => {}}
+            >
                 <MedicineIcon source={isVacine ? vacine : pills} />
                 <MedicineColumn>
                     <MedicineName>{item.name}</MedicineName>
-                    {needToSchedule && (
-                        <Button onPress={goToVacine}>
-                            <Alert>Clique para agendar</Alert>
-                        </Button>
-                    )}
+                    {needToSchedule && <Alert>Clique para agendar</Alert>}
                 </MedicineColumn>
                 <MedicineQuantity>{`${item.quantity} un`}</MedicineQuantity>
             </Medicine>
