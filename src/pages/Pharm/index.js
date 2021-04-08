@@ -22,6 +22,7 @@ import {
     MedicineQuantity,
     MessageContainer,
     Message,
+    Button,
 } from './styles';
 import SearchField from '../../components/SearchField';
 
@@ -76,11 +77,22 @@ function Pharm({ navigation }) {
                 <MedicineIcon source={isVacine ? vacine : pills} />
                 <MedicineColumn>
                     <MedicineName>{item.name}</MedicineName>
-                    {needToSchedule && <Alert>Clique para agendar</Alert>}
+                    {needToSchedule && (
+                        <Button onPress={goToVacine}>
+                            <Alert>Clique para agendar</Alert>
+                        </Button>
+                    )}
                 </MedicineColumn>
                 <MedicineQuantity>{`${item.quantity} un`}</MedicineQuantity>
             </Medicine>
         );
+    }
+
+    function goToVacine(item) {
+        navigation.navigate('Vacine', {
+            name: item.name,
+            quantity: item.quantity,
+        });
     }
 
     return (
