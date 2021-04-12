@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BackHandler } from 'react-native';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setVacineData } from '../../store/modules/vacine/actions';
 
 import BackButton from '../../components/BackButton';
 import {
@@ -36,6 +37,8 @@ function Pharm({ navigation }) {
     const [medicines, setMedicine] = useState(pharm.medicines);
     const [searching, setSearching] = useState(false);
     const backTo = navigation.getParam('backTo');
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
@@ -88,9 +91,14 @@ function Pharm({ navigation }) {
     }
 
     function goToVacine(item) {
-        navigation.navigate('VacineCPF', {
+        const vacine = {
             name: item.name,
             quantity: item.quantity,
+        };
+
+        dispatch(setVacineData(vacine));
+
+        navigation.navigate('VacineCPF', {
             backTo: 'Pharm',
             previousStack: backTo,
         });

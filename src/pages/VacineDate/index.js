@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Keyboard, Content, Figure } from './styles';
+import { useSelector } from 'react-redux';
+
+import { Container, Keyboard, Content, Figure, Name, Quantity } from './styles';
 import BackButton from '../../components/BackButton';
 import { BackHandler } from 'react-native';
 
 import vacineBoard from '../../assets/icons/vacine-board.png';
 
 const VacineDate = ({ navigation }) => {
+    const name = useSelector(state => state.vacine.vacine.name);
+    const quantity = useSelector(state => state.vacine.vacine.quantity);
     const backTo = navigation.getParam('backTo') || 'SearchPharm';
     const previousStack = navigation.getParam('previousStack');
 
@@ -35,6 +39,8 @@ const VacineDate = ({ navigation }) => {
             <Keyboard>
                 <Content>
                     <Figure source={vacineBoard} />
+                    <Name>{name}</Name>
+                    <Quantity>{`${quantity} un`}</Quantity>
                 </Content>
             </Keyboard>
         </Container>

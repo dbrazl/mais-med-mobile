@@ -27,3 +27,20 @@ export const Figure = styled.Image.attrs({
     width: 100px;
     height: 100px;
 `;
+
+export const Name = styled.Text.attrs({
+    numberOfLines: 2,
+})`
+    font-family: 'Nunito Regular';
+    font-size: 18px;
+    color: black;
+    text-align: center;
+`;
+
+export const Quantity = styled.Text`
+    margin-top: 10px;
+    font-family: 'Nunito Regular';
+    font-size: 18px;
+    color: #808080;
+    text-align: center;
+`;

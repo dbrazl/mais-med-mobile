@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { BackHandler } from 'react-native';
-import verifyCPF from '../../services/cpf';
 import _ from 'lodash';
-import { useDispatch } from 'react-redux';
+import verifyCPF from '../../services/cpf';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { saveCPF } from '../../store/modules/vacine/actions';
 
 import {
@@ -18,12 +18,14 @@ import {
     Alert,
 } from './styles';
 import BackButton from '../../components/BackButton';
+import { BackHandler } from 'react-native';
 
 import vacineBoard from '../../assets/icons/vacine-board.png';
 
 const Vacine = ({ navigation }) => {
-    const name = navigation.getParam('name') || 'Vacina';
-    const quantity = navigation.getParam('quantity') || 0;
+    const name = useSelector(state => state.vacine.vacine.name);
+    const quantity = useSelector(state => state.vacine.vacine.quantity);
+
     const backTo = navigation.getParam('backTo') || 'SearchPharm';
     const previousStack = navigation.getParam('previousStack');
 
