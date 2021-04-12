@@ -15,6 +15,7 @@ const INITIAL_STATE = {
     },
     dates: [],
     schedules: [],
+    vacinesScheduled: [],
     error: {
         status: false,
         message: '',
@@ -52,6 +53,10 @@ export default function vacine(state = INITIAL_STATE, action) {
                 draft.schedules = action.payload.data.map(item => ({
                     label: item,
                 }));
+                break;
+
+            case '@vacine/GET_VACINES_SUCCESS':
+                draft.vacinesScheduled = action.payload.data;
                 break;
 
             case '@vacine/VACINE_PROCEDURE_FAILURE':

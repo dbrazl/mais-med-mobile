@@ -8,6 +8,7 @@ import {
     indexPharmByMedicineRequest,
     selectPharm,
 } from '../../store/modules/pharms/actions';
+import { getVacinesRequest } from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -37,11 +38,16 @@ import searchAnimation from '../../assets/animations/search-animation.json';
 function SearchMedicine({ navigation }) {
     const [searching, setSearching] = useState(false);
     const pharms = useSelector(state => state.pharms.data);
+    const vacinesScheduled = useSelector(
+        state => state.vacine.vacinesScheduled
+    );
+    const hasVacines = vacinesScheduled?.length >= 0;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
+        dispatch(getVacinesRequest({ page: 0 }));
 
         return () =>
             BackHandler.removeEventListener('hardwareBackPress', onPressBack);
@@ -117,14 +123,16 @@ function SearchMedicine({ navigation }) {
                     </Message>
                 </MessageContainer>
             )}
-            <NamedButtonShell>
-                <NamedButton
-                    background="#BA98FF"
-                    text="Vacinas agendadas"
-                    labelWidth="220px"
-                    iconSource={vacine}
-                />
-            </NamedButtonShell>
+            {hasVacines && (
+                <NamedButtonShell>
+                    <NamedButton
+                        background="#BA98FF"
+                        text="Vacinas agendadas"
+                        labelWidth="220px"
+                        iconSource={vacine}
+                    />
+                </NamedButtonShell>
+            )}
         </Container>
     );
 }

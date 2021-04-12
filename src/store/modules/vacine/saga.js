@@ -7,6 +7,7 @@ import {
     getDatesResponse,
     vacineProcedureFailure,
     getSchedulesSuccess,
+    getVacinesSuccess,
 } from './actions';
 
 function* getDates({ payload }) {
@@ -39,7 +40,23 @@ function* getSchedules({ payload }) {
     }
 }
 
+function* getVacines({ payload }) {
+    try {
+        const { page } = payload;
+
+        const { response } = yield race({
+            response: call(api.get, `/vacine?page=${page}`),
+            timeout: timer(),
+        });
+
+        yield put(getVacinesSuccess(response.data));
+    } catch (error) {
+        yield put(vacineProcedureFailure(true, error.message));
+    }
+}
+
 export default all([
     takeLatest('@vacine/GET_DATES_REQUEST', getDates),
     takeLatest('@vacine/GET_SCHEDULES_REQUEST', getSchedules),
+    takeLatest('@vacine/GET_VACINES_REQUEST', getVacines),
 ]);

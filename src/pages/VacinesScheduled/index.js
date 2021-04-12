@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { Container, List } from './styles';
+import { useSelector } from 'react-redux';
+
+import { Container } from './styles';
 import { BackHandler } from 'react-native';
 
 const VacinesScheduled = ({ navigation }) => {
+    const vacines = useSelector(state => state.vacine.vacinesScheduled);
     const backTo = navigation.getParam('backTo') || 'SearchPharm';
     const previousStack = navigation.getParam('previousStack');
 

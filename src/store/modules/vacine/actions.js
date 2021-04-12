@@ -54,6 +54,20 @@ export function getSchedulesSuccess(data) {
     };
 }
 
+export function getVacinesRequest({ page }) {
+    return {
+        type: '@vacine/GET_VACINES_REQUEST',
+        payload: { page },
+    };
+}
+
+export function getVacinesSuccess(data) {
+    return {
+        type: '@vacine/GET_VACINES_SUCCESS',
+        payload: { data },
+    };
+}
+
 export function vacineProcedureFailure(error, message) {
     return {
         type: '@vacine/VACINE_PROCEDURE_FAILURE',
