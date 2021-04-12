@@ -5,14 +5,14 @@ import transition from './transition';
 import SearchPharm from '../pages/SearchPharm';
 import Pharm from '../pages/Pharm';
 import SearchMedicine from '../pages/SearchMedicine';
-import Vacine from '../pages/Vacine';
+import VacineCPF from '../pages/VacineCPF';
 
 export const SignSwitchNavigator = createAnimatedSwitchNavigator(
     {
         SearchPharm,
         Pharm,
         SearchMedicine,
-        Vacine,
+        VacineCPF,
     },
     {
         transition: transition(),
