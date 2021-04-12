@@ -75,7 +75,7 @@ function Pharm({ navigation }) {
         return (
             <Medicine
                 activeOpacity={needToSchedule ? 0.2 : 1}
-                onPress={needToSchedule ? goToVacine : () => {}}
+                onPress={needToSchedule ? () => goToVacine(item) : () => {}}
             >
                 <MedicineIcon source={isVacine ? vacine : pills} />
                 <MedicineColumn>
