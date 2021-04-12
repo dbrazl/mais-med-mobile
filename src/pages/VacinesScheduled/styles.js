@@ -29,6 +29,7 @@ export const Item = styled.View`
     margin-top: 20px;
     height: 50px;
     display: flex;
+    align-items: center;
     flex-direction: row;
 `;
 
@@ -38,6 +39,7 @@ export const Icon = styled.Image`
 `;
 
 export const Column = styled.View`
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
 `;

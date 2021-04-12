@@ -89,6 +89,12 @@ function SearchMedicine({ navigation }) {
         );
     }
 
+    function goToVacinesScheduled() {
+        goToPage('VacinesScheduled', {
+            backTo: 'SearchMedicine',
+        });
+    }
+
     return (
         <Container>
             <BackButton onPress={event => goToPage('SearchPharm')} />
@@ -130,6 +136,7 @@ function SearchMedicine({ navigation }) {
                         text="Vacinas agendadas"
                         labelWidth="220px"
                         iconSource={vacine}
+                        onPress={goToVacinesScheduled}
                     />
                 </NamedButtonShell>
             )}
