@@ -26,6 +26,13 @@ export function getDatesResponse(data) {
     };
 }
 
+export function setDatePreference({ date }) {
+    return {
+        type: '@vacine/SET_DATE_PREFERENCE',
+        payload: { date },
+    };
+}
+
 export function vacineProcedureFailure(error, message) {
     return {
         type: '@vacine/VACINE_PROCEDURE_FAILURE',

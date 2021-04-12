@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getDatesRequest } from '../../store/modules/vacine/actions';
+import {
+    getDatesRequest,
+    setDatePreference,
+} from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -45,6 +48,10 @@ const VacineDate = ({ navigation }) => {
         return true;
     }
 
+    function onPressItem(item) {
+        dispatch(setDatePreference({ date: item.label }));
+    }
+
     return (
         <Container>
             <BackButton
@@ -56,7 +63,11 @@ const VacineDate = ({ navigation }) => {
                     <Name>{name}</Name>
                     <Quantity>{`${quantity} un`}</Quantity>
                     <Message>Selecione uma data para vacinação</Message>
-                    <ScheduleList label="Data" items={dates} />
+                    <ScheduleList
+                        label="Data"
+                        items={dates}
+                        onPressItem={onPressItem}
+                    />
                 </Content>
             </Keyboard>
         </Container>
