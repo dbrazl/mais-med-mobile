@@ -21,7 +21,7 @@ export const List = styled.FlatList.attrs({
     width: 100%;
 `;
 
-export const Item = styled.View`
+export const Item = styled.TouchableOpacity`
     margin-top: 20px;
     width: 100%;
     height: 50px;

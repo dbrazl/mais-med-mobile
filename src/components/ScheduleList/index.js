@@ -6,10 +6,10 @@ import { Container, Title, List, Item, IconShell, Icon, Label } from './styles';
 
 import calendar from '../../assets/icons/calendar.png';
 
-const ScheduleList = ({ label, items, listIcon, height }) => {
+const ScheduleList = ({ label, items, listIcon, height, onPressItem }) => {
     function renderItem({ item }) {
         return (
-            <Item>
+            <Item onPress={() => onPressItem(item)}>
                 <IconShell>
                     <Icon source={listIcon} />
                 </IconShell>
@@ -36,6 +36,7 @@ ScheduleList.propTypes = {
     items: PropTypes.array,
     listIcon: PropTypes.node,
     height: PropTypes.number,
+    onPressItem: PropTypes.func,
 };
 
 ScheduleList.defaultProps = {
@@ -49,6 +50,7 @@ ScheduleList.defaultProps = {
     ],
     listIcon: calendar,
     height: 415,
+    onPressItem: () => {},
 };
 
 export default ScheduleList;
