@@ -51,6 +51,10 @@ const Vacine = ({ navigation }) => {
     useEffect(() => {
         if (validCPF) {
             dispatch(saveCPF(cpf));
+            goToPage('VacineDate', {
+                backTo: 'VacineCPF',
+                previousStack: backTo,
+            });
         }
     }, [validCPF]);
 

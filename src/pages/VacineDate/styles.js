@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
 export const Container = styled.View`
     padding: 0 20px;
@@ -11,10 +12,8 @@ export const Keyboard = styled.KeyboardAvoidingView.attrs({
     behavior: 'position',
 })``;
 
-const height = Dimensions.get('window').height;
-
 export const Content = styled.View`
-    height: ${height - 77}px;
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;

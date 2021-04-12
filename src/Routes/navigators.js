@@ -6,6 +6,7 @@ import SearchPharm from '../pages/SearchPharm';
 import Pharm from '../pages/Pharm';
 import SearchMedicine from '../pages/SearchMedicine';
 import VacineCPF from '../pages/VacineCPF';
+import VacineDate from '../pages/VacineDate';
 
 export const SignSwitchNavigator = createAnimatedSwitchNavigator(
     {
@@ -13,6 +14,7 @@ export const SignSwitchNavigator = createAnimatedSwitchNavigator(
         Pharm,
         SearchMedicine,
         VacineCPF,
+        VacineDate,
     },
     {
         transition: transition(),
