@@ -22,7 +22,7 @@ import { BackHandler } from 'react-native';
 
 import vacineBoard from '../../assets/icons/vacine-board.png';
 
-const Vacine = ({ navigation }) => {
+const VacineCPF = ({ navigation }) => {
     const name = useSelector(state => state.vacine.vacine.name);
     const quantity = useSelector(state => state.vacine.vacine.quantity);
 
@@ -109,16 +109,16 @@ const Vacine = ({ navigation }) => {
     );
 };
 
-Vacine.propTypes = {
+VacineCPF.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func,
     }),
 };
 
-Vacine.defaultProps = {
+VacineCPF.defaultProps = {
     navigation: {
         navigate: () => {},
     },
 };
 
-export default Vacine;
+export default VacineCPF;
