@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDatesRequest } from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -21,11 +22,15 @@ import vacineBoard from '../../assets/icons/vacine-board.png';
 const VacineDate = ({ navigation }) => {
     const name = useSelector(state => state.vacine.vacine.name);
     const quantity = useSelector(state => state.vacine.vacine.quantity);
+    const dates = useSelector(state => state.vacine.dates);
     const backTo = navigation.getParam('backTo') || 'SearchPharm';
     const previousStack = navigation.getParam('previousStack');
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
+        dispatch(getDatesRequest({ page: 0 }));
 
         return () =>
             BackHandler.removeEventListener('hardwareBackPress', onPressBack);
@@ -51,7 +56,7 @@ const VacineDate = ({ navigation }) => {
                     <Name>{name}</Name>
                     <Quantity>{`${quantity} un`}</Quantity>
                     <Message>Selecione uma data para vacinação</Message>
-                    <ScheduleList />
+                    <ScheduleList label="Data" items={dates} />
                 </Content>
             </Keyboard>
         </Container>

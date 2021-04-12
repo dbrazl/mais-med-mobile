@@ -4,7 +4,8 @@ import auth from './auth/saga';
 import user from './user/saga';
 import pharms from './pharms/saga';
 import map from './map/saga';
+import vacine from './vacine/saga';
 
 export default function* rootSaga() {
-    return yield all([auth, user, pharms, map]);
+    return yield all([auth, user, pharms, map, vacine]);
 }

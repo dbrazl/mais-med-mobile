@@ -8,8 +8,6 @@ import calendar from '../../assets/icons/calendar.png';
 
 const ScheduleList = ({ label, items, listIcon, height }) => {
     function renderItem({ item }) {
-        console.tron.log(item);
-
         return (
             <Item>
                 <IconShell>
