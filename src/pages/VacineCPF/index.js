@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { BackHandler } from 'react-native';
 import verifyCPF from '../../services/cpf';
 import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { saveCPF } from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -28,6 +30,10 @@ const Vacine = ({ navigation }) => {
     const [validCPF, setValidCPF] = useState(false);
     const [cpf, setCpf] = useState('');
 
+    const CPF_FULL = cpf.length === 14;
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
 
@@ -36,13 +42,17 @@ const Vacine = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
-        const CPF_FULL = cpf.length === 14;
-
         if (CPF_FULL) {
             const extracted = cpf.replace(/\D/g, '');
             setValidCPF(verifyCPF(extracted));
         }
     }, [cpf]);
+
+    useEffect(() => {
+        if (validCPF) {
+            dispatch(saveCPF(cpf));
+        }
+    }, [validCPF]);
 
     function onPressBack(event) {
         goToPage(backTo, { backTo: previousStack });
@@ -84,7 +94,9 @@ const Vacine = ({ navigation }) => {
                         placeholder="Seu CPF"
                         maxLength={14}
                     />
-                    {!validCPF && <Alert>Informe um CPF válido</Alert>}
+                    {!validCPF && CPF_FULL && (
+                        <Alert>Informe um CPF válido</Alert>
+                    )}
                 </Content>
             </Keyboard>
         </Container>

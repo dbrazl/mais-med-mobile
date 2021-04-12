@@ -88,7 +88,7 @@ function Pharm({ navigation }) {
     }
 
     function goToVacine(item) {
-        navigation.navigate('Vacine', {
+        navigation.navigate('VacineCPF', {
             name: item.name,
             quantity: item.quantity,
             backTo: 'Pharm',
