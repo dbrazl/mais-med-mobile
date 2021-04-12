@@ -68,6 +68,13 @@ export function getVacinesSuccess(data) {
     };
 }
 
+export function storeVacineScheduleSuccess(data) {
+    return {
+        type: '@vacine/STORE_VACINES_SCHEDULE_SUCCESS',
+        payload: { data },
+    };
+}
+
 export function vacineProcedureFailure(error, message) {
     return {
         type: '@vacine/VACINE_PROCEDURE_FAILURE',
