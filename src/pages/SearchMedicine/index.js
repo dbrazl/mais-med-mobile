@@ -24,11 +24,14 @@ import {
     Distance,
     Units,
     AnimationWrapper,
+    NamedButtonShell,
 } from './styles';
 import BackButton from '../../components/BackButton';
 import SearchField from '../../components/SearchField';
+import NamedButton from '../../components/NamedButton';
 
 import pharmIcon from '../../assets/icons/pharm-icon.png';
+import vacine from '../../assets/icons/vacine-icon.png';
 import searchAnimation from '../../assets/animations/search-animation.json';
 
 function SearchMedicine({ navigation }) {
@@ -114,6 +117,14 @@ function SearchMedicine({ navigation }) {
                     </Message>
                 </MessageContainer>
             )}
+            <NamedButtonShell>
+                <NamedButton
+                    background="#BA98FF"
+                    text="Vacinas agendadas"
+                    labelWidth="220px"
+                    iconSource={vacine}
+                />
+            </NamedButtonShell>
         </Container>
     );
 }

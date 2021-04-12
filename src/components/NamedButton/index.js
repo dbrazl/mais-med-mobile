@@ -4,10 +4,19 @@ import PropTypes from 'prop-types';
 import { Container, IconContainer, Icon, TextContainer, Text } from './styles';
 import styles from '../../globals/styles';
 
-function NamedButton({ iconSource, background, color, text, onPress }) {
+import pills from '../../assets/icons/pills.png';
+
+function NamedButton({
+    iconSource,
+    background,
+    color,
+    text,
+    onPress,
+    labelWidth,
+}) {
     return (
         <Container onPress={onPress}>
-            <TextContainer background={background}>
+            <TextContainer background={background} width={labelWidth}>
                 <Text color={color}>{text}</Text>
             </TextContainer>
             <IconContainer style={styles.shadow}>
@@ -18,19 +27,21 @@ function NamedButton({ iconSource, background, color, text, onPress }) {
 }
 
 NamedButton.propTypes = {
-    iconSource: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    iconSource: PropTypes.node,
     background: PropTypes.string,
     color: PropTypes.string,
     text: PropTypes.string,
     onPress: PropTypes.func,
+    labelWidth: PropTypes.string,
 };
 
 NamedButton.defaultProps = {
-    iconSource: '',
+    iconSource: pills,
     background: '#6DA0CF',
     color: 'white',
     text: 'Botão',
     onPress: () => {},
+    labelWidth: 'auto',
 };
 
 export default NamedButton;

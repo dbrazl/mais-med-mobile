@@ -89,3 +89,9 @@ export const AnimationWrapper = styled.View`
     width: 150px;
     height: 150px;
 `;
+
+export const NamedButtonShell = styled.View`
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+`;

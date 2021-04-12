@@ -29,7 +29,8 @@ export const Icon = styled.Image.attrs({
 export const TextContainer = styled.View`
     position: absolute;
     right: 24px;
-    width: 177px;
+    width: ${props => (props.width ? props.width : 'auto')};
+    min-width: 177px;
     height: 50px;
     padding-left: 15px;
     display: flex;
