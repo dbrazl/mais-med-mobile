@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getSchedulesRequest } from '../../store/modules/vacine/actions';
+import {
+    getSchedulesRequest,
+    setSchedulePreference,
+} from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -47,7 +50,7 @@ const VacineDate = ({ navigation }) => {
     }
 
     function onPressItem(item) {
-        // dispatch(setDatePreference({ date: item.label }));
+        dispatch(setSchedulePreference({ schedule: item.label }));
     }
 
     return (

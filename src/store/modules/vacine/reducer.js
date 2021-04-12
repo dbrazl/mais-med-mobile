@@ -44,6 +44,10 @@ export default function vacine(state = INITIAL_STATE, action) {
                 draft.preferences.date = action.payload.date;
                 break;
 
+            case '@vacine/SET_SCHEDULE_PREFERENCE':
+                draft.preferences.schedule = action.payload.schedule;
+                break;
+
             case '@vacine/GET_SCHEDULES_SUCCESS':
                 draft.schedules = action.payload.data.map(item => ({
                     label: item,

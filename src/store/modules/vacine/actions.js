@@ -33,6 +33,13 @@ export function setDatePreference({ date }) {
     };
 }
 
+export function setSchedulePreference({ schedule }) {
+    return {
+        type: '@vacine/SET_SCHEDULE_PREFERENCE',
+        payload: { schedule },
+    };
+}
+
 export function getSchedulesRequest({ date }) {
     return {
         type: '@vacine/GET_SCHEDULES_REQUEST',
