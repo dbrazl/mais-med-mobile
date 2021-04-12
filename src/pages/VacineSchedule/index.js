@@ -67,7 +67,7 @@ const VacineDate = ({ navigation }) => {
                     <Message>Selecione uma horário para vacinação</Message>
                     <ScheduleList
                         label="Data"
-                        items={dates}
+                        items={[]}
                         onPressItem={onPressItem}
                     />
                 </Content>

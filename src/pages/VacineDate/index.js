@@ -50,6 +50,10 @@ const VacineDate = ({ navigation }) => {
 
     function onPressItem(item) {
         dispatch(setDatePreference({ date: item.label }));
+        goToPage('VacineSchedule', {
+            backTo: 'VacineDate',
+            previousStack: backTo,
+        });
     }
 
     return (
