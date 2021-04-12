@@ -31,11 +31,10 @@ export const Figure = styled.Image.attrs({
 `;
 
 export const Message = styled.Text`
-    margin-top: ${props => (props.marginTop ? props.marginTop : 0)};
     font-family: 'Nunito Regular';
     font-size: 18px;
     color: black;
-    font-weight: ${props => (props.fontWeight ? props.fontWeight : 'unset')};
+    font-weight: ${props => (props.fontWeight ? props.fontWeight : 'normal')};
     text-align: center;
 `;
 
@@ -48,6 +47,7 @@ export const Schedule = styled.View`
 export const PurpleMessage = styled.Text`
     font-family: 'Nunito Regular';
     font-size: 18px;
+    font-weight: bold;
     color: #ba98ff;
     text-align: center;
 `;

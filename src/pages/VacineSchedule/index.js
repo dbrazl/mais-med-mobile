@@ -51,6 +51,7 @@ const VacineDate = ({ navigation }) => {
 
     function onPressItem(item) {
         dispatch(setSchedulePreference({ schedule: item.label }));
+        goToPage('VacineRegistered');
     }
 
     return (

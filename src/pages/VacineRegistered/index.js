@@ -23,8 +23,6 @@ const VacineRegistered = ({ navigation }) => {
     const schedule = useSelector(state => state.vacine.preferences.schedule);
     const time1 = schedule.replace(/\D/g, '').substring(0, 4);
     const time2 = schedule.replace(/\D/g, '').substring(4, 8);
-    const backTo = navigation.getParam('backTo') || 'SearchPharm';
-    const previousStack = navigation.getParam('previousStack');
 
     const dispatch = useDispatch();
 
@@ -36,7 +34,7 @@ const VacineRegistered = ({ navigation }) => {
     }, []);
 
     function onPressBack(event) {
-        goToPage(backTo, { backTo: previousStack });
+        goToPage('SearchPharm');
         return true;
     }
 
@@ -44,27 +42,31 @@ const VacineRegistered = ({ navigation }) => {
         navigation.navigate(page, data);
     }
 
+    function mask(value, pattern) {
+        let index = 0;
+        const string = value.toString();
+        return pattern.replace(/9/g, () => string[index++] || '');
+    }
+
     return (
         <Container>
-            <BackButton
-                onPress={() => goToPage(backTo, { backTo: previousStack })}
-            />
+            <BackButton onPress={() => goToPage('SearchPharm')} />
             <Keyboard>
                 <Content>
                     <Figure source={vacineBoard} />
                     <Message fontWeight="bold">
                         Seu agendamento foi criado!
                     </Message>
-                    <Message marginTop="20px">
+                    <Message>
                         Lembre-se de levar sua carteirinha de vacinação e um
                         documento com foto!
                     </Message>
                     <Schedule>
-                        <PurpleMessage>{date}</PurpleMessage>{' '}
-                        <BlackMessage>as</BlackMessage>{' '}
-                        <PurpleMessage>{time1}</PurpleMessage>{' '}
-                        <BlackMessage>a</BlackMessage>{' '}
-                        <PurpleMessage>{time2}</PurpleMessage>{' '}
+                        <PurpleMessage>{date} </PurpleMessage>
+                        <BlackMessage>as </BlackMessage>
+                        <PurpleMessage>{mask(time1, '99:99')} </PurpleMessage>
+                        <BlackMessage>a </BlackMessage>
+                        <PurpleMessage>{mask(time2, '99:99')} </PurpleMessage>
                         <BlackMessage>horas</BlackMessage>
                     </Schedule>
                 </Content>

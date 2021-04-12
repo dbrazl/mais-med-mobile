@@ -8,6 +8,7 @@ import SearchMedicine from '../pages/SearchMedicine';
 import VacineCPF from '../pages/VacineCPF';
 import VacineDate from '../pages/VacineDate';
 import VacineSchedule from '../pages/VacineSchedule';
+import VacineRegistered from '../pages/VacineRegistered';
 
 export const SignSwitchNavigator = createAnimatedSwitchNavigator(
     {
@@ -17,6 +18,7 @@ export const SignSwitchNavigator = createAnimatedSwitchNavigator(
         VacineCPF,
         VacineDate,
         VacineSchedule,
+        VacineRegistered,
     },
     {
         transition: transition(),
