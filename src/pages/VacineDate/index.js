@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
 
-import { Container, Keyboard, Content, Figure, Name, Quantity } from './styles';
+import {
+    Container,
+    Keyboard,
+    Content,
+    Figure,
+    Name,
+    Quantity,
+    Message,
+} from './styles';
 import BackButton from '../../components/BackButton';
+import ScheduleList from '../../components/ScheduleList';
 import { BackHandler } from 'react-native';
 
 import vacineBoard from '../../assets/icons/vacine-board.png';
@@ -41,6 +50,8 @@ const VacineDate = ({ navigation }) => {
                     <Figure source={vacineBoard} />
                     <Name>{name}</Name>
                     <Quantity>{`${quantity} un`}</Quantity>
+                    <Message>Selecione uma data para vacinação</Message>
+                    <ScheduleList />
                 </Content>
             </Keyboard>
         </Container>

@@ -44,3 +44,11 @@ export const Quantity = styled.Text`
     color: #808080;
     text-align: center;
 `;
+
+export const Message = styled.Text`
+    margin-top: 20px;
+    font-family: 'Nunito Regular';
+    font-size: 18px;
+    color: black;
+    text-align: center;
+`;
