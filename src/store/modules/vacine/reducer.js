@@ -14,6 +14,7 @@ const INITIAL_STATE = {
         schedule: '',
     },
     dates: [],
+    schedules: [],
     error: {
         status: false,
         message: '',
@@ -41,6 +42,12 @@ export default function vacine(state = INITIAL_STATE, action) {
 
             case '@vacine/SET_DATE_PREFERENCE':
                 draft.preferences.date = action.payload.date;
+                break;
+
+            case '@vacine/GET_SCHEDULES_SUCCESS':
+                draft.schedules = action.payload.data.map(item => ({
+                    label: item,
+                }));
                 break;
 
             case '@vacine/VACINE_PROCEDURE_FAILURE':

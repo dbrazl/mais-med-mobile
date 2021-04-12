@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
-import {
-    getDatesRequest,
-    setDatePreference,
-} from '../../store/modules/vacine/actions';
+import { getSchedulesRequest } from '../../store/modules/vacine/actions';
 
 import {
     Container,
@@ -25,7 +22,8 @@ import vacineBoard from '../../assets/icons/vacine-board.png';
 const VacineDate = ({ navigation }) => {
     const name = useSelector(state => state.vacine.vacine.name);
     const quantity = useSelector(state => state.vacine.vacine.quantity);
-    // const schedules = useSelector(state => state.vacine.schedules);
+    const schedules = useSelector(state => state.vacine.schedules);
+    const date = useSelector(state => state.vacine.preferences.date);
     const backTo = navigation.getParam('backTo') || 'SearchPharm';
     const previousStack = navigation.getParam('previousStack');
 
@@ -33,7 +31,7 @@ const VacineDate = ({ navigation }) => {
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onPressBack);
-        // dispatch(getSchedulesRequest({ page: 0 }));
+        dispatch(getSchedulesRequest({ date }));
 
         return () =>
             BackHandler.removeEventListener('hardwareBackPress', onPressBack);
@@ -49,7 +47,7 @@ const VacineDate = ({ navigation }) => {
     }
 
     function onPressItem(item) {
-        dispatch(setDatePreference({ date: item.label }));
+        // dispatch(setDatePreference({ date: item.label }));
     }
 
     return (
@@ -66,8 +64,8 @@ const VacineDate = ({ navigation }) => {
                     <Quantity>{`${quantity} un`}</Quantity>
                     <Message>Selecione uma horário para vacinação</Message>
                     <ScheduleList
-                        label="Data"
-                        items={[]}
+                        label="Horários"
+                        items={schedules}
                         onPressItem={onPressItem}
                     />
                 </Content>

@@ -33,6 +33,20 @@ export function setDatePreference({ date }) {
     };
 }
 
+export function getSchedulesRequest({ date }) {
+    return {
+        type: '@vacine/GET_SCHEDULES_REQUEST',
+        payload: { date },
+    };
+}
+
+export function getSchedulesSuccess(data) {
+    return {
+        type: '@vacine/GET_SCHEDULES_SUCCESS',
+        payload: { data },
+    };
+}
+
 export function vacineProcedureFailure(error, message) {
     return {
         type: '@vacine/VACINE_PROCEDURE_FAILURE',
